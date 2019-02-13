@@ -5,13 +5,14 @@ import App from './App';
 import AutorBox from './Autor';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import LivroBox from './Livros';
 
 ReactDOM.render(
     (<BrowserRouter>
         <App>
             <Switch>
                 <Route path="/autor" component={AutorBox} />
-                <Route path="/livro" />
+                <Route path="/livro" component={LivroBox} />
             </Switch>
         </App>
     </BrowserRouter>),

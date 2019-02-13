@@ -27,11 +27,9 @@ export default class App extends Component {
         </div>
         <div id="main">
           <div className="header">
-            <h1>Bem-vindo ao sistema</h1>
+            <h1>Sistema</h1>
           </div>
-          <div className="content" id="content">
             {this.props.children}
-          </div>
         </div>
       </div>
     );

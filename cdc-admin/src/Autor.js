@@ -36,13 +36,13 @@ export class FormularioAutor extends Component {
         })
             .then(res => res.json())
             .then(novaLista => {
-                if(novaLista.status === 200) {
+                if (novaLista.status === 200) {
                     PubSub.publish('atualiza-lista-autores', novaLista);
-//                   this.setState({nome: '', email: '', senha: ''});
-//                   PubSub.publish("limpa-erros",{});
+                    this.setState({ nome: '', email: '', senha: '' });
+                    PubSub.publish("limpa-erros", {});
                 } else {
                     new TratadorErros().publicaErros(novaLista);
-                }                
+                }
             })
             .catch(console.error);
     }
@@ -115,13 +115,14 @@ export default class AutorBox extends Component {
             .catch(console.log);
 
         PubSub.subscribe('atualiza-lista-autores', (topico, novaLista) => {
-            this.setState({lista: novaLista})
+            this.setState({ lista: novaLista })
         });
     }
 
     render() {
         return (
             <div className="content" id="content">
+                <h2>Autores</h2>
                 <FormularioAutor />
                 <TabelaAutores lista={this.state.lista} />
             </div>
