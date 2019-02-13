@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-import AutorBox, { } from './Autor';
 import 'purecss/build/pure.css';
 import './css/side-menu.css';
+import { Link } from 'react-router-dom';
 
-class App extends Component {
+export default class App extends Component {
 
   render() {
     return (
@@ -16,25 +16,24 @@ class App extends Component {
 
         <div id="menu">
           <div className="pure-menu">
-            <a className="pure-menu-heading" href="/home">Company</a>
+            <Link className="pure-menu-heading" to="/home">Company</Link>
 
             <ul className="pure-menu-list">
-              <li className="pure-menu-item"><a href="/home" className="pure-menu-link">Home</a></li>
-              <li className="pure-menu-item"><a href="/home" className="pure-menu-link">Autor</a></li>
-              <li className="pure-menu-item"><a href="/home" className="pure-menu-link">Livro</a></li>
+              <li className="pure-menu-item"><Link to="/" className="pure-menu-link">Home</Link></li>
+              <li className="pure-menu-item"><Link to="/autor" className="pure-menu-link">Autor</Link></li>
+              <li className="pure-menu-item"><Link to="/livro" className="pure-menu-link">Livro</Link></li>
             </ul>
           </div>
         </div>
-
         <div id="main">
           <div className="header">
-            <h1>Cadastro de Autores</h1>
+            <h1>Bem-vindo ao sistema</h1>
           </div>
-          <AutorBox />
+          <div className="content" id="content">
+            {this.props.children}
+          </div>
         </div>
       </div>
     );
   }
 }
-
-export default App;
