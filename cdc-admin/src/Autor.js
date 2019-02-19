@@ -6,7 +6,7 @@ import { InputCustonizado } from './components/InputCustonizado';
 import { SubmitButton } from './components/SubmitButton';
 import { TratadorErros } from './TratadorErros';
 
-const API = "http://cdc-react.herokuapp.com/api/autores";
+const API = "https://cdc-react.herokuapp.com/api/autores";
 
 export class FormularioAutor extends Component {
 
@@ -14,9 +14,6 @@ export class FormularioAutor extends Component {
         super();
         this.state = { nome: '', email: '', senha: '' };
         this.enviaForm = this.enviaForm.bind(this);
-        this.setNome = this.setNome.bind(this);
-        this.setEmail = this.setEmail.bind(this);
-        this.setSenha = this.setSenha.bind(this);
     }
 
     enviaForm(evento) {
@@ -47,25 +44,17 @@ export class FormularioAutor extends Component {
             .catch(console.error);
     }
 
-    setNome(evento) {
-        this.setState({ nome: evento.target.value });
-    }
-
-    setEmail(evento) {
-        this.setState({ email: evento.target.value });
-    }
-
-    setSenha(evento) {
-        this.setState({ senha: evento.target.value });
+    salvarAlteracao(nomeInput, evento) {
+        this.setState({ [nomeInput]: evento.target.value });
     }
 
     render() {
         return (
             <div className="pure-form pure-form-aligned">
                 <form className="pure-form pure-form-aligned" onSubmit={this.enviaForm.bind()} method="post">
-                    <InputCustonizado id="nome" name="nome" label="Nome" type="text" value={this.state.nome} onChange={this.setNome} />
-                    <InputCustonizado id="email" name="email" label="Email" type="email" value={this.state.email} onChange={this.setEmail} />
-                    <InputCustonizado id="senha" name="senha" label="Senha" type="password" value={this.state.senha} onChange={this.setSenha} />
+                    <InputCustonizado id="nome" name="nome" label="Nome" type="text" value={this.state.nome} onChange={this.salvarAlteracao.bind(this, 'nome')} />
+                    <InputCustonizado id="email" name="email" label="Email" type="email" value={this.state.email} onChange={this.salvarAlteracao.bind(this, 'email')} />
+                    <InputCustonizado id="senha" name="senha" label="Senha" type="password" value={this.state.senha} onChange={this.salvarAlteracao.bind(this, 'senha')} />
                     <SubmitButton text="Gravar" />
                 </form>
 

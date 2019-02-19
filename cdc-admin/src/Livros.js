@@ -6,7 +6,7 @@ import { InputCustonizado } from './components/InputCustonizado';
 import { SubmitButton } from './components/SubmitButton';
 import { TratadorErros } from './TratadorErros';
 
-const API = "http://cdc-react.herokuapp.com/api/livros";
+const API = "https://cdc-react.herokuapp.com/api";
 
 export class TabelaLivros extends Component {
     render() {
@@ -98,10 +98,12 @@ export class FormularioLivro extends Component {
                         <select value={this.state.autorId} name="autorId" onChange="{this.setAutorId}">
                             <option value="">Selecione um autor</option>
                             {
-                                this.props.autores.map(autor => {
-                                    return <option value={autor.id}>{autor.nome}</option>
-                                })
+                                this.props.autores.map(autor =>
+                                    <option value={autor.id}>{autor.nome}</option>
+                                )
                             }
+
+                            <option value="">Selecione um autor</option>
                         </select>
                     </div>
                     <SubmitButton text="Gravar" />
@@ -117,15 +119,9 @@ export default class LivroBox extends Component {
         this.state = { lista: [], autores: [] };
     }
 
-    async componentWillMount() {
-        try {
-            let livros = await fetch(API);
-            this.setState({ lista: livros });
-        } catch (error) {
-            console.error(error);
-        }
+    componentWillMount() {
 
-        fetch(API)
+        fetch(`${API}/autores`)
             .then(res => res.json())
             .then(autores => this.setState({ lista: autores }))
             .catch(console.log);
